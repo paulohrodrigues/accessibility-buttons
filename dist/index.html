@@ -36,7 +36,7 @@
         <!-- endbuild -->
     </head>
     <body>
-        <header>
+        <header class="header">
             <h1>Accessibility Buttons</h1>
 
             <p>Buttons to add/remove contrast and increase/decrease font size.</p>
@@ -82,8 +82,12 @@
 
     <main class="main">
         <div>
-            <button type="button" aria-label="Increase Font" id="accessibility-font" class="js-acessibility">+A</button>
-            <button type="button" aria-label="Add Contrast" id="accessibility-contrast" class="js-acessibility">Add Contrast</button>
+            <!-- <button type="button" aria-label="Increase Font" class="acessibility-buttons acessibility-buttons--font">+A</button>
+            <button type="button" aria-label="Add Contrast"  class="acessibility-buttons acessibility-buttons--contrast">Add Contrast</button> -->
+
+            <button type="button" aria-label="Increase Font" class="acessibility-buttons acessibility-buttons--decrease">-A</button>
+            <button type="button" aria-label="Decrease Font" class="acessibility-buttons acessibility-buttons--increase">+A</button>
+            <button type="button" aria-label="Add Contrast"  class="acessibility-buttons acessibility-buttons--contrast">Add Contrast</button>
         </div>
 
 
@@ -91,10 +95,10 @@
 
         <p>Download with <a href="https://npmjs.com">NPM</a></p>
 
-        <code><pre>bower install accessibility-buttons --save</pre></code>
+        <code><pre>npm install accessibility-buttons --save</pre></code>
 
 
-        <p>Download with <a href="http://bower.io">Bower</a></p>
+        <p>Or download with <a href="http://bower.io">Bower</a></p>
 
         <code><pre>bower install accessibility-buttons --save</pre></code>
 
@@ -113,14 +117,33 @@
 &lt;button aria-label="Add Contrast" id="accessibility-contrast" class="js-acessibility">Add Contrast&lt;/button></pre>
         </code>
 
-        <p><strong>Note:</strong> To get <kbd>font-size</kbd> to work, it's necessary to use "em" or "rem" units.</p>
 
 
-        <p>Initialize the plugin</p>
+        <p>Initialize the Plugin after the dom ready</p>
+
+        <p>If you don't use jQuery (support IE9+)</p>
 
         <code>
-            <pre>accessibilityButtons();</pre>
+            <pre>function ready(fn) {
+    if (document.readyState !== 'loading') {
+        fn();
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+
+ready(function() {
+    accessibilityButtons();
+});</pre>
         </code>
+
+        <p>If you use jQuery</p>
+
+        <code><pre>$(document).ready(function() {
+    accessibilityButtons();
+})</pre></code>
+
+        <p><strong>Note:</strong> To get <kbd>font-size</kbd> to work, it's necessary to use "em" or "rem" units.</p>
 
         <h2>Settings</h2>
 
@@ -160,14 +183,14 @@
         </code>
     </main>
 
-        <footer>
-            Copyright © 2014 - 2016 Tiago Porto
+        <footer class="footer">
+        Copyright © 2014 - <span id="year"></span> Tiago Porto
         </footer>
 
-        <!-- build:js js/scripts.combined.min.js -->
+        <!-- build:js js/demo.combined.min.js -->
         <script src="js/accessibility-buttons.js"></script>
-        <script src="js/vendors.js"></script>
         <script src="js/scripts.js"></script>
+        <script src="js/vendors.js"></script>
         <!-- endbuild -->
 
         <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
